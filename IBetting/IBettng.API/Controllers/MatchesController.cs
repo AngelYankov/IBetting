@@ -1,4 +1,6 @@
-﻿using IBetting.Services.MatchService;
+﻿using AutoMapper;
+using IBetting.Services.MatchService;
+using IBettng.API.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IBettng.API.Controllers
@@ -8,10 +10,12 @@ namespace IBettng.API.Controllers
     public class MatchesController : ControllerBase
     {
         private readonly IMatchService matchService;
+        private readonly IMapper mapper;
 
-        public MatchesController(IMatchService matchService)
+        public MatchesController(IMatchService matchService, IMapper mapper)
         {
             this.matchService = matchService;
+            this.mapper = mapper;
         }
 
         /// <summary>
@@ -23,7 +27,9 @@ namespace IBettng.API.Controllers
         public async Task<IActionResult> GetActiveMatches()
         {
             var matches = await this.matchService.GetAllMatchesAsync();
-            return Ok(matches);
+            var result = this.mapper.Map<List<MatchDTO>>(matches);
+
+            return Ok(result);
         }
 
         /// <summary>
@@ -39,7 +45,9 @@ namespace IBettng.API.Controllers
             try
             {
                 var match = await this.matchService.GetMatchAsync(matchXmlId);
-                return Ok(match);
+                var result = this.mapper.Map<MatchDTO>(match);
+
+                return Ok(result);
             }
             catch (Exception)
             {

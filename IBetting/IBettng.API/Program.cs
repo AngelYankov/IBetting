@@ -6,6 +6,7 @@ using IBetting.Services.DataSavingService;
 using IBetting.Services.DeserializeService;
 using IBetting.Services.MappingService;
 using IBetting.Services.MatchService;
+using IBettng.API.MappingProfiles;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -32,6 +33,8 @@ builder.Services.AddScoped<IBetRepository, BetRepository>();
 builder.Services.AddScoped<IOddRepository, OddRepository>();
 
 builder.Services.AddHostedService<DataUploaderBackgroudService>();
+
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 var app = builder.Build();
 

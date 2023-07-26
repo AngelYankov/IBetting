@@ -1,4 +1,5 @@
-﻿using IBetting.Services.MatchService;
+﻿using AutoMapper;
+using IBetting.Services.MatchService;
 using IBettng.API.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
@@ -12,7 +13,9 @@ namespace IBetting.Tests.ControllerTests
         {
             // Arrange
             var mockMatchService = new Mock<IMatchService>();
-            var controller = new MatchesController(mockMatchService.Object);
+            var mapperMock = new Mock<IMapper>();
+
+            var controller = new MatchesController(mockMatchService.Object, mapperMock.Object);
 
             // Act
             var result = await controller.GetActiveMatches();
@@ -26,7 +29,9 @@ namespace IBetting.Tests.ControllerTests
         {
             // Arrange
             var mockMatchService = new Mock<IMatchService>();
-            var controller = new MatchesController(mockMatchService.Object);
+            var mapperMock = new Mock<IMapper>();
+
+            var controller = new MatchesController(mockMatchService.Object, mapperMock.Object);
 
             var matchId = 1;
 
@@ -46,7 +51,9 @@ namespace IBetting.Tests.ControllerTests
             var mockMatchService = new Mock<IMatchService>();
             mockMatchService.Setup(service => service.GetMatchAsync(matchId)).ThrowsAsync(new ArgumentException("Match not found."));
 
-            var controller = new MatchesController(mockMatchService.Object);
+            var mapperMock = new Mock<IMapper>();
+
+            var controller = new MatchesController(mockMatchService.Object, mapperMock.Object);
 
             // Act
             var result = await controller.GetMatch(matchId);
