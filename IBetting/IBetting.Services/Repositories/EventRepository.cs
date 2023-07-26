@@ -63,6 +63,7 @@ namespace IBetting.Services.Repositories
                     }
                     catch (Exception ex)
                     {
+                        Console.WriteLine("Error saving Events: " + ex.ToString());
                         return false;
                     }
                     finally

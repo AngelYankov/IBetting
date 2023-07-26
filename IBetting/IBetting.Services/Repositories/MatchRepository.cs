@@ -102,6 +102,7 @@ namespace IBetting.Services.Repositories
                     }
                     catch (Exception ex)
                     {
+                        Console.WriteLine("Error saving Matches: " + ex.ToString());
                         return false;
                     }
                     finally

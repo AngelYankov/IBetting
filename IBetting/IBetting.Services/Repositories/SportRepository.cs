@@ -60,6 +60,7 @@ namespace IBetting.Services.Repositories
                     }
                     catch (Exception ex)
                     {
+                        Console.WriteLine("Error saving Sports: " + ex.ToString());
                         return false;
                     }
                     finally

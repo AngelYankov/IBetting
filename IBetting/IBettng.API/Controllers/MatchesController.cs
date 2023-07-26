@@ -43,6 +43,7 @@ namespace IBettng.API.Controllers
             }
             catch (Exception)
             {
+                Console.WriteLine("Match not found.");
                 return NotFound();
             }
         }

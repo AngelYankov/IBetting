@@ -95,6 +95,7 @@ namespace IBetting.Services.Repositories
                     }
                     catch (Exception ex)
                     {
+                        Console.WriteLine("Error saving Odds: " + ex.ToString());
                         return false;
                     }
                     finally
