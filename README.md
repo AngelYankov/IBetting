@@ -1,4 +1,4 @@
-# BettingAPI
+# IBetting API
 Application that retrieves betting data from an online XML source and saves it to a local database. The data is refreshed every 60 seconds to show active Events, Matches and their Bets and Odds.
 
 ## The Web API consists of two endpoints.
