@@ -10,8 +10,8 @@ namespace IBetting.Services.MatchService.Models
             this.Name = match.Name;
             this.StartDate = match.StartDate;
             this.MatchType = match.MatchType.ToString();
-            this.AllBets = match.Bets.Select(b => new BetWithOddsDTO(b)).ToList();
             this.EventId = match.EventId;
+            this.AllBets = match.Bets.Select(b => new BetWithOddsDTO(b)).ToList();
         }
 
         public int Id { get; set; }
@@ -22,8 +22,8 @@ namespace IBetting.Services.MatchService.Models
 
         public string MatchType { get; set; }
 
-        public List<BetWithOddsDTO> AllBets { get; set; }
-
         public int EventId { get; set; }
+
+        public List<BetWithOddsDTO> AllBets { get; set; }
     }
 }

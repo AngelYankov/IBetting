@@ -4,8 +4,8 @@ namespace IBetting.Services.MatchService
 {
     public interface IMatchService
     {
-        Task<List<MatchWithBetsDTO>> GetAllMatches();
+        Task<List<MatchWithBetsDTO>> GetAllMatchesAsync();
 
-        Task<MatchWithBetsDTO> GetMatch(int matchXmlId);
+        Task<MatchWithBetsDTO> GetMatchAsync(int matchXmlId);
     }
 }

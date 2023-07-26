@@ -10,8 +10,8 @@ namespace IBetting.Services.MatchService.Models
             this.Id = bet.Id;
             this.IsLive = bet.IsLive;
             this.Name = bet.Name;
-            this.AllOdds = bet.Odds.Select(o => new OddDTO(o)).ToList();
             this.IsActive = bet.IsActive;
+            this.AllOdds = bet.Odds.Select(o => new OddDTO(o)).ToList();
         }
 
         public int Id { get; set; }
@@ -20,8 +20,8 @@ namespace IBetting.Services.MatchService.Models
 
         public string Name { get; set; }
 
-        public List<OddDTO> AllOdds { get; set; }
-
         public bool IsActive { get; set; }
+
+        public List<OddDTO> AllOdds { get; set; }
     }
 }

@@ -5,6 +5,11 @@ namespace IBetting.Services.BettingService.Models
 {
     public class MatchDTO
     {
+        public MatchDTO()
+        {
+
+        }
+
         public MatchDTO(Match match)
         {
             this.Id = match.Id;
