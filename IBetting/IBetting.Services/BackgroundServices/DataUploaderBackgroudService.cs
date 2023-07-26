@@ -21,8 +21,8 @@ namespace IBetting.Services.BackgroundServices
                 {
                     using (var scope = serviceScopeFactory.CreateScope())
                     {
-                        var bettingService = scope.ServiceProvider.GetRequiredService<IDataSavingService>();
-                        bettingService.Save();
+                        var dataSavingService = scope.ServiceProvider.GetRequiredService<IDataSavingService>();
+                        dataSavingService.Save();
                     }
                 }
                 catch (Exception e)
