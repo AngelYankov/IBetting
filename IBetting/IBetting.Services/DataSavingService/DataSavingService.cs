@@ -1,6 +1,6 @@
-﻿using IBetting.Services.DeserializeService;
+﻿using IBetting.DataAccess.Repositories;
+using IBetting.Services.DeserializeService;
 using IBetting.Services.MappingService;
-using IBetting.Services.Repositories;
 
 namespace IBetting.Services.DataSavingService
 {

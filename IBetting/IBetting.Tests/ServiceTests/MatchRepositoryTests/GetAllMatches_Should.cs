@@ -1,8 +1,8 @@
 ﻿using IBetting.DataAccess;
 using IBetting.DataAccess.Enums;
+using IBetting.DataAccess.Models;
+using IBetting.DataAccess.Repositories;
 using IBetting.Services;
-using IBetting.Services.MatchService.Models;
-using IBetting.Services.Repositories;
 using Microsoft.Extensions.Configuration;
 using Moq;
 
@@ -35,7 +35,7 @@ namespace IBetting.Tests.ServiceTests.MatchRepositoryTests
 
                 // Assert
                 Assert.NotNull(result);
-                Assert.IsType<List<MatchWithBetsDTO>>(result);
+                Assert.IsType<List<DataAccess.Models.Match>>(result);
             }
         }
 
@@ -65,7 +65,7 @@ namespace IBetting.Tests.ServiceTests.MatchRepositoryTests
                 // Assert
                 foreach (var match in result)
                 {
-                    Assert.Equal(MatchTypeEnum.PreMatch.ToString(), match.MatchType);
+                    Assert.Equal(MatchTypeEnum.PreMatch, match.MatchType);
                     Assert.True(match.StartDate >= DateTime.UtcNow && match.StartDate < DateTime.UtcNow.AddHours(24));
                 }
             }
@@ -97,7 +97,7 @@ namespace IBetting.Tests.ServiceTests.MatchRepositoryTests
                 // Assert
                 foreach (var match in result)
                 {
-                    foreach (var bet in match.AllBets)
+                    foreach (var bet in match.Bets)
                     {
                         Assert.True(bet.Name == Constants.MatchWinner
                             || bet.Name == Constants.TotalMapsPlayed
@@ -133,7 +133,7 @@ namespace IBetting.Tests.ServiceTests.MatchRepositoryTests
                 // Assert
                 foreach (var match in result)
                 {
-                    foreach (var bet in match.AllBets)
+                    foreach (var bet in match.Bets)
                     {
                         Assert.True(bet.IsActive);
                     }
@@ -167,9 +167,9 @@ namespace IBetting.Tests.ServiceTests.MatchRepositoryTests
                 // Assert
                 foreach (var match in result)
                 {
-                    foreach (var bet in match.AllBets)
+                    foreach (var bet in match.Bets)
                     {
-                        foreach (var odd in bet.AllOdds)
+                        foreach (var odd in bet.Odds)
                         {
                             Assert.True(odd.IsActive);
                         }
@@ -204,17 +204,17 @@ namespace IBetting.Tests.ServiceTests.MatchRepositoryTests
                 // Assert
                 foreach (var match in result)
                 {
-                    foreach (var bet in match.AllBets)
+                    foreach (var bet in match.Bets)
                     {
-                        var oddsWithSpecialValue = bet.AllOdds.Where(o => !string.IsNullOrEmpty(o.SpecialBetValue)).ToList();
+                        var oddsWithSpecialValue = bet.Odds.Where(o => !string.IsNullOrEmpty(o.SpecialBetValue)).ToList();
 
                         if (oddsWithSpecialValue.Count > 0)
                         {
-                            Assert.NotNull(bet.AllOdds.Select(o => o.SpecialBetValue));
+                            Assert.NotNull(bet.Odds.Select(o => o.SpecialBetValue));
                         }
                         else
                         {
-                            Assert.True(bet.AllOdds.All(o => o.SpecialBetValue == null));
+                            Assert.True(bet.Odds.All(o => o.SpecialBetValue == null));
                         }
                     }
                 }

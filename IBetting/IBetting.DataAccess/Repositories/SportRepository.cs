@@ -1,9 +1,9 @@
-﻿using IBetting.Services.BettingService.Models;
-using IBetting.Services.Extensions;
+﻿using IBetting.DataAccess.Extensions;
+using IBetting.DataAccess.Models;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 
-namespace IBetting.Services.Repositories
+namespace IBetting.DataAccess.Repositories
 {
     public class SportRepository : ISportRepository
     {
@@ -18,7 +18,7 @@ namespace IBetting.Services.Repositories
         /// Adds, Updates and Deletes Sport objects from Sport database table according to current XML document
         /// </summary>
         /// <param name="allSports">All Sport objects from current XML document</param>
-        public bool SaveSports(IEnumerable<SportDTO> allSports)
+        public bool SaveSports(IEnumerable<Sport> allSports)
         {
             using (SqlConnection connection = new SqlConnection() { ConnectionString = connectionString })
             {

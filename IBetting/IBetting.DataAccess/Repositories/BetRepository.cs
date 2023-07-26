@@ -1,9 +1,9 @@
-﻿using IBetting.Services.BettingService.Models;
-using IBetting.Services.Extensions;
+﻿using IBetting.DataAccess.Extensions;
+using IBetting.DataAccess.Models;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 
-namespace IBetting.Services.Repositories
+namespace IBetting.DataAccess.Repositories
 {
     public class BetRepository : IBetRepository
     {
@@ -19,7 +19,7 @@ namespace IBetting.Services.Repositories
         /// Adds new BetChangeLog objects to BetChangeLogs database table when records are updated or deleted in Bet database table
         /// </summary>
         /// <param name="allBets">All Bet objects from current XML document</param>
-        public bool SaveBets(IEnumerable<BetDTO> allBets)
+        public bool SaveBets(IEnumerable<Bet> allBets)
         {
             using (SqlConnection connection = new SqlConnection() { ConnectionString = connectionString })
             {
@@ -31,9 +31,9 @@ namespace IBetting.Services.Repositories
 
                         command.CommandText = @"CREATE TABLE #TmpBetTable(
                             [Id] [INT],
+                            [Name] [TEXT],
                             [IsLive] [BIT],
                             [MatchId] [INT],
-                            [Name] [TEXT],
                             [MatchType] [INT],
                             [MatchStartDate] [DATETIME],
                             [IsActive] [BIT])";

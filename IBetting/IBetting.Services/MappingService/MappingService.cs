@@ -1,6 +1,5 @@
 ﻿using IBetting.DataAccess.Enums;
 using IBetting.DataAccess.Models;
-using IBetting.Services.BettingService.Models;
 using System.Globalization;
 using System.Xml;
 
@@ -13,7 +12,7 @@ namespace IBetting.Services.MappingService
         /// </summary>
         /// <param name="document">XML document with data</param>
         /// <returns>List with all Sport objects mapped from XML document</returns>
-        public IEnumerable<SportDTO> MapSports(XmlDocument document)
+        public IEnumerable<Sport> MapSports(XmlDocument document)
         {
             var allSports = new List<Sport>();
             var sports = document.SelectNodes(Constants.SportNodes);
@@ -29,7 +28,7 @@ namespace IBetting.Services.MappingService
                 allSports.Add(sport);
             }
 
-            return allSports.Select(s => new SportDTO(s));
+            return allSports;
         }
 
         /// <summary>
@@ -37,7 +36,7 @@ namespace IBetting.Services.MappingService
         /// </summary>
         /// <param name="document">XML document with data</param>
         /// <returns>List with all Event objects mapped from XML document</returns>
-        public IEnumerable<EventDTO> MapEvents(XmlDocument document)
+        public IEnumerable<Event> MapEvents(XmlDocument document)
         {
             var allEvents = new List<Event>();
             var events = document.SelectNodes(Constants.EventNodes);
@@ -56,7 +55,7 @@ namespace IBetting.Services.MappingService
                 allEvents.Add(eventHistory);
             }
 
-            return allEvents.Select(e => new EventDTO(e));
+            return allEvents;
         }
 
         /// <summary>
@@ -64,7 +63,7 @@ namespace IBetting.Services.MappingService
         /// </summary>
         /// <param name="document">XML document with data</param>
         /// <returns>List with all Match objects mapped from XML document</returns>
-        public IEnumerable<MatchDTO> MapMatches(XmlDocument document)
+        public IEnumerable<Match> MapMatches(XmlDocument document)
         {
             var allMatches = new List<Match>();
             var matches = document.SelectNodes(Constants.MatchNodes);
@@ -82,7 +81,7 @@ namespace IBetting.Services.MappingService
                 allMatches.Add(match);
             }
 
-            return allMatches.Select(m => new MatchDTO(m));
+            return allMatches;
         }
 
         /// <summary>
@@ -90,7 +89,7 @@ namespace IBetting.Services.MappingService
         /// </summary>
         /// <param name="document">XML document with data</param>
         /// <returns>List with all Bet objects mapped from XML document</returns>
-        public IEnumerable<BetDTO> MapBets(XmlDocument document)
+        public IEnumerable<Bet> MapBets(XmlDocument document)
         {
             var allBets = new List<Bet>();
             var bets = document.SelectNodes(Constants.BetNodes);
@@ -110,7 +109,7 @@ namespace IBetting.Services.MappingService
                 allBets.Add(bet);
             }
 
-            return allBets.Select(b => new BetDTO(b));
+            return allBets;
         }
 
         /// <summary>
@@ -118,7 +117,7 @@ namespace IBetting.Services.MappingService
         /// </summary>
         /// <param name="document">XML document with data</param>
         /// <returns>List with all Odd objects mapped from XML document</returns>
-        public IEnumerable<OddDTO> MapOdds(XmlDocument document)
+        public IEnumerable<Odd> MapOdds(XmlDocument document)
         {
             var allOdds = new List<Odd>();
             var odds = document.SelectNodes(Constants.OddNodes);
@@ -137,7 +136,7 @@ namespace IBetting.Services.MappingService
                 allOdds.Add(odd);
             }
 
-            return allOdds.Select(o => new OddDTO(o));
+            return allOdds;
         }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using IBetting.DataAccess;
-using IBetting.Services.MatchService.Models;
-using IBetting.Services.Repositories;
+using IBetting.DataAccess.Repositories;
 using Microsoft.Extensions.Configuration;
 using Moq;
+using Match = IBetting.DataAccess.Models.Match;
 
 namespace IBetting.Tests.ServiceTests.MatchRepositoryTests
 {
@@ -35,7 +35,7 @@ namespace IBetting.Tests.ServiceTests.MatchRepositoryTests
 
                 // Assert
                 Assert.NotNull(result);
-                Assert.IsType<MatchWithBetsDTO>(result);
+                Assert.IsType<Match>(result);
                 Assert.Equal(matchXmlId, result.Id);
             }
         }
@@ -66,8 +66,8 @@ namespace IBetting.Tests.ServiceTests.MatchRepositoryTests
                 var result = await matchService.GetMatchAsync(matchXmlId);
 
                 // Assert
-                Assert.Contains(result.AllBets, b => b.IsActive);
-                Assert.Contains(result.AllBets, b => !b.IsActive);
+                Assert.Contains(result.Bets, b => b.IsActive);
+                Assert.Contains(result.Bets, b => !b.IsActive);
             }
         }
 
@@ -97,15 +97,15 @@ namespace IBetting.Tests.ServiceTests.MatchRepositoryTests
                 var result = await matchService.GetMatchAsync(matchXmlId);
 
                 // Assert
-                foreach (var bet in result.AllBets)
+                foreach (var bet in result.Bets)
                 {
                     if (bet.IsActive)
                     {
-                        Assert.Contains(bet.AllOdds, o => o.IsActive);
+                        Assert.Contains(bet.Odds, o => o.IsActive);
                     }
                     else
                     {
-                        Assert.Contains(bet.AllOdds, o => !o.IsActive);
+                        Assert.Contains(bet.Odds, o => !o.IsActive);
                     }
                 }
             }

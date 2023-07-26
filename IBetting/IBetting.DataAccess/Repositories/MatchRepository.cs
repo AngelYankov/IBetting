@@ -1,16 +1,18 @@
-﻿using IBetting.DataAccess;
-using IBetting.DataAccess.Enums;
-using IBetting.Services.BettingService.Models;
-using IBetting.Services.Extensions;
-using IBetting.Services.MatchService.Models;
+﻿using IBetting.DataAccess.Enums;
+using IBetting.DataAccess.Extensions;
+using IBetting.DataAccess.Models;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-namespace IBetting.Services.Repositories
+namespace IBetting.DataAccess.Repositories
 {
     public class MatchRepository : BaseRepository, IMatchRepository
     {
+        private const string MatchWinner = "Match Winner";
+        private const string MapAdvantage = "Map Advantage";
+        private const string TotalMapsPlayed = "Total Maps Played";
+
         private readonly string? connectionString;
 
         public MatchRepository(IBettingDbContext dbContext, IConfiguration configuration)
@@ -24,7 +26,7 @@ namespace IBetting.Services.Repositories
         /// Adds new MatchChangeLog objects to MatchChangeLogs database table when records are updated or deleted in Match database table
         /// </summary>
         /// <param name="allMatches">All Match objects from current XML document</param>
-        public bool SaveMatches(IEnumerable<MatchDTO> allMatches)
+        public bool SaveMatches(IEnumerable<Match> allMatches)
         {
             using (SqlConnection connection = new SqlConnection() { ConnectionString = connectionString })
             {
@@ -117,16 +119,16 @@ namespace IBetting.Services.Repositories
         /// Gets all Match objects starting in the next 24 hours along with all their active Bets and Odds
         /// </summary>
         /// <returns>List with all Match objects starting in the next 24 hours along with all their active Bets and Odds</returns>
-        public async Task<List<MatchWithBetsDTO>> GetAllMatchesAsync()
+        public async Task<List<Match>> GetAllMatchesAsync()
         {
             var allFutureMatches = await this.dbContext.Matches
                 .Where(m => m.StartDate > DateTime.UtcNow
                     && m.StartDate < DateTime.UtcNow.AddHours(24)
                     && m.MatchType != MatchTypeEnum.OutRight)
                 .Include(m => m.Bets.Where(b => b.IsActive == true
-                    && (b.Name == Constants.MatchWinner
-                        || b.Name == Constants.MapAdvantage
-                        || b.Name == Constants.TotalMapsPlayed)))
+                    && (b.Name == MatchWinner
+                        || b.Name == MapAdvantage
+                        || b.Name == TotalMapsPlayed)))
                     .ThenInclude(b => b.Odds.Where(o => o.IsActive == true))
                 .ToListAsync();
 
@@ -145,7 +147,7 @@ namespace IBetting.Services.Repositories
                 }
             }
 
-            return allFutureMatches.Select(m => new MatchWithBetsDTO(m)).ToList();
+            return allFutureMatches;
         }
 
         /// <summary>
@@ -153,7 +155,7 @@ namespace IBetting.Services.Repositories
         /// </summary>
         /// <param name="matchXmlId">Id of the Match object according to the XML document</param>
         /// <returns>Match object with all of its active and past Bets and Odds</returns>
-        public async Task<MatchWithBetsDTO> GetMatchAsync(int matchXmlId)
+        public async Task<Match> GetMatchAsync(int matchXmlId)
         {
             var match = await this.dbContext.Matches
                 .Include(m => m.Bets)
@@ -161,9 +163,7 @@ namespace IBetting.Services.Repositories
                 .FirstOrDefaultAsync(m => m.Id == matchXmlId)
                 ?? throw new ArgumentException("Match not found.");
 
-            var matchDTO = new MatchWithBetsDTO(match);
-
-            return matchDTO;
+            return match;
         }
     }
 }

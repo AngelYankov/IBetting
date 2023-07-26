@@ -1,0 +1,32 @@
+﻿<XmlSports xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" CreateDate="2023-07-24T13:03:12.0551897Z">
+	<Sport Name="eSports" ID="2357">
+		<Event Name="FIFA, GT League" ID="62647" IsLive="false" CategoryID="8212">
+			<Match Name="Juventus (nero) - SSC Napoli (spencer)" ID="3037424" StartDate="2023-07-24T12:59:00" MatchType="Live">
+				<Bet Name="Match Odds" ID="47907418" IsLive="true">
+					<Odd Name="1" ID="329682700" Value="1.55"/>
+					<Odd Name="X" ID="329682701" Value="5.43"/>
+					<Odd Name="2" ID="329682697" Value="3.70"/>
+				</Bet>
+				<Bet Name="Total Goals" ID="47907419" IsLive="true">
+					<Odd Name="Over" ID="329682906" Value="1.73" SpecialBetValue="4.5"/>
+					<Odd Name="Under" ID="329682904" Value="2.01" SpecialBetValue="4.5"/>
+					<Odd Name="Over" ID="329682699" Value="1.81" SpecialBetValue="5.5"/>
+					<Odd Name="Under" ID="329682698" Value="1.91" SpecialBetValue="5.5"/>
+				</Bet>
+			</Match>
+			<Match Name="Lazio (aibothard) - AC Milan (general)" ID="3037426" StartDate="2023-07-24T12:59:00" MatchType="Live">
+				<Bet Name="Match Odds" ID="47907416" IsLive="true">
+					<Odd Name="1" ID="329682694" Value="3.49"/>
+					<Odd Name="X" ID="329682696" Value="4.32"/>
+					<Odd Name="2" ID="329682693" Value="1.72"/>
+				</Bet>
+				<Bet Name="Total Goals" ID="47907417" IsLive="true">
+					<Odd Name="Over" ID="329682893" Value="1.81" SpecialBetValue="3.5"/>
+					<Odd Name="Under" ID="329682892" Value="1.91" SpecialBetValue="3.5"/>
+					<Odd Name="Over" ID="329682692" Value="2.26" SpecialBetValue="4.5"/>
+					<Odd Name="Under" ID="329682695" Value="1.58" SpecialBetValue="4.5"/>
+				</Bet>
+			</Match>
+		</Event>
+	</Sport>
+</XmlSports>

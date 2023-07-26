@@ -1,9 +1,9 @@
-﻿using IBetting.Services.BettingService.Models;
-using IBetting.Services.Extensions;
+﻿using IBetting.DataAccess.Extensions;
+using IBetting.DataAccess.Models;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 
-namespace IBetting.Services.Repositories
+namespace IBetting.DataAccess.Repositories
 {
     public class EventRepository : IEventRepository
     {
@@ -18,7 +18,7 @@ namespace IBetting.Services.Repositories
         /// Adds, Updates and Deletes Event objects from Event database table according to current XML document
         /// </summary>
         /// <param name="allEvents">All Event objects from current XML document</param>
-        public bool SaveEvents(IEnumerable<EventDTO> allEvents)
+        public bool SaveEvents(IEnumerable<Event> allEvents)
         {
             using (SqlConnection connection = new SqlConnection() { ConnectionString = connectionString })
             {

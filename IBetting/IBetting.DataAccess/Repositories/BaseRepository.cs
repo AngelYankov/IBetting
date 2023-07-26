@@ -1,6 +1,4 @@
-﻿using IBetting.DataAccess;
-
-namespace IBetting.Services.Repositories
+﻿namespace IBetting.DataAccess.Repositories
 {
     public abstract class BaseRepository
     {

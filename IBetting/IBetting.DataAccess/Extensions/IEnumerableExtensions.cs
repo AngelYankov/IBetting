@@ -1,7 +1,7 @@
 ﻿using System.Data;
 using System.Reflection;
 
-namespace IBetting.Services.Extensions
+namespace IBetting.DataAccess.Extensions
 {
     public static class IEnumerableExtensions
     {
@@ -11,24 +11,35 @@ namespace IBetting.Services.Extensions
             Type t = typeof(T);
             PropertyInfo[] propertyInfos = t.GetProperties();
 
-            //Inspect the properties and create the columns in the DataTable
             foreach (PropertyInfo propertyInfo in propertyInfos)
             {
-                Type ColumnType = propertyInfo.PropertyType;
-                if ((ColumnType.IsGenericType))
+                Type propertyType = propertyInfo.PropertyType;
+
+                if (propertyType.IsClass && propertyType != typeof(string))
                 {
-                    ColumnType = ColumnType.GetGenericArguments()[0];
+                    continue;
                 }
-                dataTable.Columns.Add(propertyInfo.Name, ColumnType);
+
+                if ((propertyType.IsGenericType))
+                {
+                    propertyType = propertyType.GetGenericArguments()[0];
+                }
+                dataTable.Columns.Add(propertyInfo.Name, propertyType);
             }
 
-            //Populate the data table
             foreach (var item in collection)
             {
                 DataRow dataRow = dataTable.NewRow();
                 dataRow.BeginEdit();
                 foreach (PropertyInfo propertyInfo in propertyInfos)
                 {
+                    Type propertyType = propertyInfo.PropertyType;
+
+                    if (propertyType.IsClass && propertyType != typeof(string))
+                    {
+                        continue;
+                    }
+
                     if (propertyInfo.GetValue(item, null) != null)
                     {
                         dataRow[propertyInfo.Name] = propertyInfo.GetValue(item, null);

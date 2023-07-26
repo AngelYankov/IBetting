@@ -1,5 +1,5 @@
-﻿using IBetting.Services.MatchService.Models;
-using IBetting.Services.Repositories;
+﻿using IBetting.DataAccess.Models;
+using IBetting.DataAccess.Repositories;
 
 namespace IBetting.Services.MatchService
 {
@@ -16,7 +16,7 @@ namespace IBetting.Services.MatchService
         /// Call to match repository to get matches in next 24 hours
         /// </summary>
         /// <returns>List with all Match objects starting in the next 24 hours along with all their active Bets and Odds</returns>
-        public async Task<List<MatchWithBetsDTO>> GetAllMatchesAsync()
+        public async Task<List<Match>> GetAllMatchesAsync()
         {
             var matches = await this.matchRepository.GetAllMatchesAsync();
 
@@ -28,7 +28,7 @@ namespace IBetting.Services.MatchService
         /// </summary>
         /// <param name="matchXmlId">Id of the Match object according to the XML document</param>
         /// <returns>Match object with all of its active and past Bets and Odds</returns>
-        public async Task<MatchWithBetsDTO> GetMatchAsync(int matchXmlId)
+        public async Task<Match> GetMatchAsync(int matchXmlId)
         {
             var match = await this.matchRepository.GetMatchAsync(matchXmlId);
 

@@ -1,9 +1,9 @@
-﻿using IBetting.Services.BettingService.Models;
-using IBetting.Services.Extensions;
+﻿using IBetting.DataAccess.Extensions;
+using IBetting.DataAccess.Models;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 
-namespace IBetting.Services.Repositories
+namespace IBetting.DataAccess.Repositories
 {
     public class OddRepository : IOddRepository
     {
@@ -19,7 +19,7 @@ namespace IBetting.Services.Repositories
         /// Adds new OddChangeLog objects to OddChangeLogs database table when records are updated or deleted in Odd database table
         /// </summary>
         /// <param name="allOdds">All Odd objects from current XML document</param>
-        public bool SaveOdds(IEnumerable<OddDTO> allOdds)
+        public bool SaveOdds(IEnumerable<Odd> allOdds)
         {
             using (SqlConnection connection = new SqlConnection() { ConnectionString = connectionString })
             {
@@ -33,8 +33,8 @@ namespace IBetting.Services.Repositories
                             [Id] [INT],
                             [Name] [TEXT],
                             [VALUE] [DECIMAL],
-                            [BetId] [INT],
                             [SpecialBetValue] [TEXT] NULL,
+                            [BetId] [INT],
                             [IsActive] [BIT])";
 
                         command.ExecuteNonQuery();

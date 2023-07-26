@@ -31,4 +31,10 @@
     <ProjectReference Include="..\IBettng.API\IBettng.API.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="TestDataXML.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

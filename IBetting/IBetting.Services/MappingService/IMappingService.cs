@@ -1,18 +1,18 @@
-﻿using IBetting.Services.BettingService.Models;
+﻿using IBetting.DataAccess.Models;
 using System.Xml;
 
 namespace IBetting.Services.MappingService
 {
     public interface IMappingService
     {
-        IEnumerable<SportDTO> MapSports(XmlDocument document);
+        IEnumerable<Sport> MapSports(XmlDocument document);
 
-        IEnumerable<EventDTO> MapEvents(XmlDocument document);
+        IEnumerable<Event> MapEvents(XmlDocument document);
 
-        IEnumerable<MatchDTO> MapMatches(XmlDocument document);
+        IEnumerable<Match> MapMatches(XmlDocument document);
 
-        IEnumerable<BetDTO> MapBets(XmlDocument document);
+        IEnumerable<Bet> MapBets(XmlDocument document);
 
-        IEnumerable<OddDTO> MapOdds(XmlDocument document);
+        IEnumerable<Odd> MapOdds(XmlDocument document);
     }
 }

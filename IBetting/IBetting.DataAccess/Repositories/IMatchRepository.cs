@@ -1,9 +1,11 @@
 ﻿using IBetting.DataAccess.Models;
 
-namespace IBetting.Services.MatchService
+namespace IBetting.DataAccess.Repositories
 {
-    public interface IMatchService
+    public interface IMatchRepository
     {
+        bool SaveMatches(IEnumerable<Match> allMatches);
+
         Task<List<Match>> GetAllMatchesAsync();
 
         Task<Match> GetMatchAsync(int matchXmlId);

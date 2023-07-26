@@ -1,13 +1,11 @@
 using IBetting.DataAccess;
-using IBetting.Services;
+using IBetting.DataAccess.Repositories;
 using IBetting.Services.BackgroundServices;
-using IBetting.Services.BettingService;
 using IBetting.Services.DataConsumeService;
 using IBetting.Services.DataSavingService;
 using IBetting.Services.DeserializeService;
 using IBetting.Services.MappingService;
 using IBetting.Services.MatchService;
-using IBetting.Services.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

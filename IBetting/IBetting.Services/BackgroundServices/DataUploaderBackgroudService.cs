@@ -1,5 +1,4 @@
-﻿using IBetting.Services.BettingService;
-using IBetting.Services.DataSavingService;
+﻿using IBetting.Services.DataSavingService;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
