@@ -3,6 +3,7 @@ using IBetting.Services;
 using IBetting.Services.BackgroundServices;
 using IBetting.Services.BettingService;
 using IBetting.Services.DataConsumeService;
+using IBetting.Services.DataSavingService;
 using IBetting.Services.DeserializeService;
 using IBetting.Services.MappingService;
 using IBetting.Services.MatchService;
@@ -21,14 +22,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<IBettingDbContext>(options =>
                  options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddHttpClient("MyHttpClient", client =>
-{
-    client.BaseAddress = new Uri(Constants.XmlFeedLink);
-});
-
-builder.Services.AddScoped<IHttpClientWrapper, HttpClientWrapper>();
 builder.Services.AddScoped<IMatchService, MatchService>();
-builder.Services.AddScoped<IDataSavingService, DataSavingService>();
 builder.Services.AddScoped<IDataConsumeService, DataConsumeService>();
 builder.Services.AddScoped<IDataSavingService, DataSavingService>();
 builder.Services.AddScoped<IMappingService, MappingService>();

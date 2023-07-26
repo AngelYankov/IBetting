@@ -1,4 +1,5 @@
 ﻿using IBetting.Services.BettingService;
+using IBetting.Services.DataSavingService;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -27,6 +28,7 @@ namespace IBetting.Services.BackgroundServices
                 }
                 catch (Exception e)
                 {
+                    Console.WriteLine("Background service error: " + e.Message);
                 }
 
                 await Task.Delay(60000, stoppingToken);

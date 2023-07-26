@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IBetting.DataAccess.Migrations
 {
     [DbContext(typeof(IBettingDbContext))]
-    [Migration("20230725102756_init")]
+    [Migration("20230726125204_init")]
     partial class init
     {
         /// <inheritdoc />

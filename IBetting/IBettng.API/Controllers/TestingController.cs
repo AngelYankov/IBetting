@@ -1,4 +1,5 @@
 ﻿using IBetting.Services.BettingService;
+using IBetting.Services.DataSavingService;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -21,11 +22,11 @@ namespace IBettng.API.Controllers
         /// <returns>Time elapsed to retrieve and save data from XML document</returns>
         [HttpPost]
         [Route("save")]
-        public IActionResult UpdateData()
+        public async Task<IActionResult> UpdateData()
         {
             Stopwatch s = new Stopwatch();
             s.Start();
-            this.testingService.Save();
+            await this.testingService.Save();
             s.Stop();
             return Ok(s.ElapsedMilliseconds + " milliseconds elapsed.");
         }
